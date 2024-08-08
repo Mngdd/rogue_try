@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Data.SqlTypes;
 using System.Diagnostics;
 
 // оно автоматом сделало partial class, так что мб 
@@ -10,6 +11,14 @@ public partial class Player : CharacterBody2D
 	public const float JumpVelocity = -400.0f;
 	public const float GlidingRatio = 0.08f;
 	public const float TurningRatio = 0.30f;
+	// public const float CoyoteDelay = 0.5f;
+	public const int CoyoteDelay = 10;
+
+	// flags to handle coyote jumpes
+	private bool _CanJump = true;
+	private bool _CoyoteTimerStarted = false;
+	// timer to handle coyote jumpes
+	private int _CoyoteTimer = 0;
 	
 	// Get the gravity from the project settings to be synced with RigidBody nodes.
 	public float gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
@@ -17,7 +26,7 @@ public partial class Player : CharacterBody2D
 	// _PhysicsProcess в отличие от _Process гарантирует стабильное обновление
 	public override void _PhysicsProcess(double delta) {
 		Vector2 velocity = Velocity;
-		
+
 		ProcessVerticalMovement(ref velocity, ref delta);
 		ProcessHorisontalMovement(ref velocity);
 
@@ -27,13 +36,22 @@ public partial class Player : CharacterBody2D
 
 	// Processes jump and gravity mechanics
 	private void ProcessVerticalMovement (ref Vector2 velocity, ref double delta) {
-		// Add the gravity.
-		if (!IsOnFloor())
+
+		if (IsOnFloor()) {
+			_CanJump = true;
+			_CoyoteTimerStarted = false;
+		} else {
+			// Handle coyote timer
+			_CoyotTimerCycle();
+			// Add the gravity.
 			velocity.Y += gravity * (float)delta;
+		}
 
 		// Handle Jump.
-		if (Input.IsActionJustPressed("move_up") && IsOnFloor())
+		if (_CanJump && Input.IsActionJustPressed("move_up")) {
 			velocity.Y = JumpVelocity;
+			_CanJump = false;
+		}
 	}
 
 	// Processes player horisontal movement
@@ -45,22 +63,36 @@ public partial class Player : CharacterBody2D
 			);
 		// Changes velocity if there's horisontal movement
 		if ( direction.X != 0) {
-			Turn(ref direction, ref velocity);
+			_Turn(ref direction, ref velocity);
 		}
 		// Returns velocity to base value if there's no horisontal input
 		else {
-			Glide(ref velocity);
+			_Glide(ref velocity);
 		}
 	}
 
 	// Slowly sets velocity to zero if movement keys are not pressed and character is on floor
-	private void Glide(ref Vector2 velocity) {
+	private void _Glide(ref Vector2 velocity) {
 		if (IsOnFloor()) {
 			velocity.X = Mathf.MoveToward(Velocity.X, 0, GlidingRatio*Speed);
 		}
 	}
 	// Slowly sets velocity to the value that depend on direction inputed by the player
-	private void Turn(ref Vector2 direction, ref Vector2 velocity) {
+	private void _Turn(ref Vector2 direction, ref Vector2 velocity) {
 		velocity.X = Mathf.MoveToward(Velocity.X, direction.X*Speed, TurningRatio*Speed);
+	}
+
+	// Handle coyote timer
+	private void _CoyotTimerCycle() {
+		if (_CoyoteTimer != 0) {
+				_CoyoteTimer--;
+		} else {
+			if (_CanJump && (!_CoyoteTimerStarted)) {
+				_CoyoteTimer = CoyoteDelay;
+				_CoyoteTimerStarted = true;
+			} else if (_CanJump && _CoyoteTimerStarted) {
+				_CanJump = false;
+			}
+		}
 	}
 }
