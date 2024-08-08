@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://oeoo0yyklqxw"]
+
+[ext_resource type="Script" path="res://Code/Tools/ChangeHealthTrigger.cs" id="1_nawnh"]
+[ext_resource type="Texture2D" uid="uid://b5st337a4dpvc" path="res://Resources/Textures/dev_test/trigger.png" id="1_tru6h"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xa6on"]
+size = Vector2(128.434, 128.057)
+
+[node name="ChangeHealthTrigger" type="Node2D"]
+scale = Vector2(0.498309, 0.499776)
+script = ExtResource("1_nawnh")
+
+[node name="_debugTexture" type="Sprite2D" parent="."]
+position = Vector2(64.0219, -64.1169)
+scale = Vector2(1.00644, 0.999072)
+texture = ExtResource("1_tru6h")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="TriggerBox" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(64.2171, -64.0287)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_xa6on")
+debug_color = Color(0.873027, 0.347195, 0, 0.42)
+
+[node name="Cooldown" type="Timer" parent="."]
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="timeout" from="Cooldown" to="." method="_on_cooldown_timeout"]
