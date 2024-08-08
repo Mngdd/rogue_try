@@ -19,7 +19,6 @@ texture = ExtResource("1_tru6h")
 
 [node name="TriggerBox" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(64.2171, -64.0287)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_xa6on")
 debug_color = Color(0.873027, 0.347195, 0, 0.42)
 
