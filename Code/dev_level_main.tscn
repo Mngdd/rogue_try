@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://cgu80j65djn3g"]
+[gd_scene load_steps=5 format=3 uid="uid://cgu80j65djn3g"]
 
 [ext_resource type="PackedScene" uid="uid://213hjevrs66g" path="res://Code/Player/Player.tscn" id="1_6rxgx"]
 [ext_resource type="TileSet" uid="uid://prt718cb3vyp" path="res://Resources/Textures/dev_test/dev_ground.tres" id="2_i1vnx"]
+[ext_resource type="PackedScene" uid="uid://cjbo0ngj3a414" path="res://Code/Enemies/Enemy.tscn" id="3_7it7b"]
 [ext_resource type="PackedScene" uid="uid://oeoo0yyklqxw" path="res://Code/Tools/ChangeHealthTrigger.tscn" id="3_fuwfv"]
 
 [node name="Main" type="Node"]
@@ -10,9 +11,6 @@
 position = Vector2(94, -30)
 scale = Vector2(0.898308, 0.299775)
 HealthAdd = 40
-
-[node name="Player" parent="." instance=ExtResource("1_6rxgx")]
-position = Vector2(8, -121)
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource("2_i1vnx")
@@ -38,3 +36,24 @@ offset_right = 209.0
 offset_bottom = -32.0
 text = "HEALTH HERE
 "
+
+[node name="MatanFan" parent="." instance=ExtResource("3_7it7b")]
+position = Vector2(-199, -38)
+
+[node name="Player" parent="." instance=ExtResource("1_6rxgx")]
+position = Vector2(-100, -44)
+bullet_scn = null
+
+[node name="Label3" type="Label" parent="."]
+offset_left = -167.0
+offset_top = -131.0
+offset_right = -9.0
+offset_bottom = -108.0
+text = "ctrl+x to get weapon"
+
+[node name="Label4" type="Label" parent="."]
+offset_left = -168.0
+offset_top = -112.0
+offset_right = -10.0
+offset_bottom = -89.0
+text = "ctrl+q to drop it (remove)"

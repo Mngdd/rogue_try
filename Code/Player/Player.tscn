@@ -1,8 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://213hjevrs66g"]
+[gd_scene load_steps=9 format=3 uid="uid://213hjevrs66g"]
 
 [ext_resource type="Script" path="res://Code/Player/Player.cs" id="1_o6xbr"]
 [ext_resource type="Texture2D" uid="uid://bg40txhkwmyjg" path="res://icon.svg" id="1_proox"]
 [ext_resource type="PackedScene" uid="uid://8bcsqaeld2tj" path="res://Resources/UI/HUD.tscn" id="2_2wgw7"]
+[ext_resource type="PackedScene" uid="uid://btt5id7hg1jwu" path="res://Code/Weapons/Bullets/Bullet.tscn" id="2_7mnd2"]
+[ext_resource type="PackedScene" uid="uid://bagdml8hn4afn" path="res://Code/Tools/HealthComponent.tscn" id="4_leeuy"]
+[ext_resource type="PackedScene" uid="uid://dexll7u86s8l6" path="res://Code/Tools/CombatComponent.tscn" id="5_4tw0o"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_sn71c"]
 animations = [{
@@ -17,8 +20,9 @@ animations = [{
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gip53"]
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
 script = ExtResource("1_o6xbr")
+bullet_scn = ExtResource("2_7mnd2")
 metadata/_edit_group_ = true
 
 [node name="HUD" parent="." instance=ExtResource("2_2wgw7")]
@@ -33,3 +37,10 @@ shape = SubResource("CapsuleShape2D_gip53")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2.08, 2.08)
+
+[node name="HandSlot" type="Node2D" parent="."]
+position = Vector2(4, 2)
+
+[node name="HealthComponent" parent="." instance=ExtResource("4_leeuy")]
+
+[node name="CombatComponent" parent="." instance=ExtResource("5_4tw0o")]

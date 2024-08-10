@@ -1,0 +1,51 @@
+[gd_scene load_steps=7 format=3 uid="uid://cjbo0ngj3a414"]
+
+[ext_resource type="Script" path="res://Code/Enemies/Enemy.cs" id="1_kh5jr"]
+[ext_resource type="PackedScene" uid="uid://bagdml8hn4afn" path="res://Code/Tools/HealthComponent.tscn" id="2_01hre"]
+[ext_resource type="Texture2D" uid="uid://dvdtufmy2ymtc" path="res://Resources/Textures/dev_test/matanaliz_fan.png" id="3_78a4j"]
+[ext_resource type="PackedScene" uid="uid://dexll7u86s8l6" path="res://Code/Tools/CombatComponent.tscn" id="3_evp7x"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_sn71c"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_78a4j")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gip53"]
+
+[node name="Enemy" type="CharacterBody2D" groups=["Enemy"]]
+script = ExtResource("1_kh5jr")
+metadata/_edit_group_ = true
+
+[node name="HealthComponent" parent="." instance=ExtResource("2_01hre")]
+MaxHealth = 150
+CurrentHealth = 150
+
+[node name="CombatComponent" parent="." instance=ExtResource("3_evp7x")]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-5.96046e-07, 4.76837e-07)
+scale = Vector2(0.2, 0.3)
+sprite_frames = SubResource("SpriteFrames_sn71c")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_gip53")
+
+[node name="HandSlot" type="Node2D" parent="."]
+position = Vector2(4, 2)
+
+[node name="hpDev" type="Label" parent="."]
+z_index = 5
+z_as_relative = false
+offset_left = -16.0
+offset_top = -26.0
+offset_right = 46.0
+offset_bottom = -3.0
+scale = Vector2(0.551688, 0.484859)
+theme_override_font_sizes/font_size = 0
+text = "HP: 100"

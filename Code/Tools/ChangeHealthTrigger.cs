@@ -7,12 +7,9 @@ public partial class ChangeHealthTrigger : Node2D {
 	[Export] public int HealthAdd = 0;
 	[Export] public bool PushBack = false;  //TODO: IMPLEMENT ME
 	[Export] public double ActInterval = 2d;
-	
-	// Called when the node enters the scene tree for the first time.
 	public override void _Ready() {
 	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta) {
 	}
 	
@@ -24,6 +21,7 @@ public partial class ChangeHealthTrigger : Node2D {
 			GD.Print("ENTITY ENTERED: " + body);
 
 			Callable callable = Callable.From(() => _act(body));
+			// FIXME: при повторном входе создается дупликат таймера, нужно пофиксить!!
 
 			var timer = GetNode<Timer>("Cooldown");
 			timer.Connect("timeout", callable);
@@ -49,7 +47,7 @@ public partial class ChangeHealthTrigger : Node2D {
 		
 		GD.Print("_act, does damage stuff lolll");
 		Player pl = (Player)body;
-		pl.AddHealth(HealthAdd);
+		pl.HpSystem.Call("AddHealth", HealthAdd);
 		// then repeat...
 	}
 	
