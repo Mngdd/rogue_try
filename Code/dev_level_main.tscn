@@ -2,8 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://213hjevrs66g" path="res://Code/Player/Player.tscn" id="1_6rxgx"]
 [ext_resource type="TileSet" uid="uid://prt718cb3vyp" path="res://Resources/Textures/dev_test/dev_ground.tres" id="2_i1vnx"]
-[ext_resource type="PackedScene" uid="uid://cjbo0ngj3a414" path="res://Code/Enemies/Enemy.tscn" id="3_7it7b"]
 [ext_resource type="PackedScene" uid="uid://oeoo0yyklqxw" path="res://Code/Tools/ChangeHealthTrigger.tscn" id="3_fuwfv"]
+[ext_resource type="PackedScene" uid="uid://cjbo0ngj3a414" path="res://Code/Enemies/Enemy.tscn" id="4_wajpj"]
 
 [node name="Main" type="Node"]
 
@@ -37,9 +37,6 @@ offset_bottom = -32.0
 text = "HEALTH HERE
 "
 
-[node name="MatanFan" parent="." instance=ExtResource("3_7it7b")]
-position = Vector2(-199, -38)
-
 [node name="Player" parent="." instance=ExtResource("1_6rxgx")]
 position = Vector2(-100, -44)
 bullet_scn = null
@@ -57,3 +54,6 @@ offset_top = -112.0
 offset_right = -10.0
 offset_bottom = -89.0
 text = "ctrl+q to drop it (remove)"
+
+[node name="Enemy" parent="." instance=ExtResource("4_wajpj")]
+position = Vector2(-198, -37)

@@ -1,12 +1,22 @@
 [gd_scene load_steps=4 format=3 uid="uid://cau8vtc82ic3d"]
 
-[ext_resource type="Script" path="res://Code/Weapons/GunPistol.cs" id="1_qcvep"]
+[ext_resource type="Script" path="res://Code/Weapons/WeaponPistol.cs" id="1_2bowg"]
 [ext_resource type="Texture2D" uid="uid://ncihqu42phpp" path="res://Resources/Textures/Weapons/High_Res_Gun_11.png" id="2_j2sut"]
 [ext_resource type="PackedScene" uid="uid://btt5id7hg1jwu" path="res://Code/Weapons/Bullets/Bullet.tscn" id="2_yqpfr"]
 
-[node name="GunTemplate" type="Node"]
-script = ExtResource("1_qcvep")
-bullet_scn = ExtResource("2_yqpfr")
+[node name="GunTemplate" type="Node2D"]
+scale = Vector2(3, 2)
+script = ExtResource("1_2bowg")
+AmmoMax = 1000
+AmmoCurrent = 1000
+ProjectileVelocity = 5
+ReloadTime = 2.0
+BulletScene = ExtResource("2_yqpfr")
+WeaponName = "choomba"
+CooldownTime = 0.15
+DamageBase = 25
+Rarity = 3
+DamageAmount = 7.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_j2sut")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://213hjevrs66g"]
+[gd_scene load_steps=10 format=3 uid="uid://213hjevrs66g"]
 
 [ext_resource type="Script" path="res://Code/Player/Player.cs" id="1_o6xbr"]
 [ext_resource type="Texture2D" uid="uid://bg40txhkwmyjg" path="res://icon.svg" id="1_proox"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://btt5id7hg1jwu" path="res://Code/Weapons/Bullets/Bullet.tscn" id="2_7mnd2"]
 [ext_resource type="PackedScene" uid="uid://bagdml8hn4afn" path="res://Code/Tools/HealthComponent.tscn" id="4_leeuy"]
 [ext_resource type="PackedScene" uid="uid://dexll7u86s8l6" path="res://Code/Tools/CombatComponent.tscn" id="5_4tw0o"]
+[ext_resource type="PackedScene" uid="uid://cau8vtc82ic3d" path="res://Code/Weapons/GunTemplate.tscn" id="7_hru22"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_sn71c"]
 animations = [{
@@ -32,6 +33,11 @@ position = Vector2(1.90735e-06, 2.38419e-07)
 scale = Vector2(0.15625, 0.234375)
 sprite_frames = SubResource("SpriteFrames_sn71c")
 
+[node name="CombatComponent" parent="." instance=ExtResource("5_4tw0o")]
+WeaponsOnSpawn = [ExtResource("7_hru22")]
+SlotsAmount = 3
+Target = 1
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_gip53")
 
@@ -42,5 +48,3 @@ zoom = Vector2(2.08, 2.08)
 position = Vector2(4, 2)
 
 [node name="HealthComponent" parent="." instance=ExtResource("4_leeuy")]
-
-[node name="CombatComponent" parent="." instance=ExtResource("5_4tw0o")]

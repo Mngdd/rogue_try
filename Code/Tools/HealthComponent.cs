@@ -2,6 +2,9 @@ using Godot;
 using System;
 
 public partial class HealthComponent : Node {
+	[Signal]
+	public delegate void DiedEventHandler();
+	
 	private bool _dead = false;
 
 	public bool Dead {
@@ -10,7 +13,7 @@ public partial class HealthComponent : Node {
 
 	[Export] public int MaxHealth = 100;
 	[Export] public int CurrentHealth = 100;
-
+	
 
 	// НЕ ИСПОЛЬЗОВАТЬ ДЛЯ УРОНА, ТК В БУДУЩЕМ ВОЗМОЖНО БУДЕТ РЕЗИСТ УРОНУ
 	public void AddHealth(int amount) {
@@ -30,6 +33,7 @@ public partial class HealthComponent : Node {
 	// AddHealth будет неудобно, тк она и для отхила тоже юзается
 	public void Damage(int amount) {
 		AddHealth(-amount);
+		GD.Print(CurrentHealth + "/" + MaxHealth);
 	}
 
 	public void Kill() {

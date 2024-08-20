@@ -27,6 +27,7 @@ MaxHealth = 150
 CurrentHealth = 150
 
 [node name="CombatComponent" parent="." instance=ExtResource("3_evp7x")]
+Target = 2
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-5.96046e-07, 4.76837e-07)

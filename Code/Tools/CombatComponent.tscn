@@ -1,6 +1,29 @@
-[gd_scene load_steps=2 format=3 uid="uid://dexll7u86s8l6"]
+[gd_scene load_steps=3 format=3 uid="uid://dexll7u86s8l6"]
 
 [ext_resource type="Script" path="res://Code/Tools/CombatComponent.cs" id="1_ib5rr"]
+[ext_resource type="Texture2D" uid="uid://cfjcr0yyvd1qy" path="res://Resources/Textures/dev_test/BarV1_Bar.png" id="2_4gt2p"]
 
-[node name="CombatComponent" type="Node"]
+[node name="CombatComponent" type="Node2D"]
+position = Vector2(1, 0)
+scale = Vector2(0.247884, 0.432942)
 script = ExtResource("1_ib5rr")
+
+[node name="DEBUG_PLACEHOLDER" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(28, -5.25)
+scale = Vector2(0.669118, 0.5)
+texture = ExtResource("2_4gt2p")
+
+[node name="Sprite2D" type="Sprite2D" parent="DEBUG_PLACEHOLDER"]
+position = Vector2(-70.2418, 36.5)
+rotation = 0.261799
+scale = Vector2(0.0928006, 3.77381)
+texture = ExtResource("2_4gt2p")
+
+[node name="Sprite2D2" type="Sprite2D" parent="DEBUG_PLACEHOLDER"]
+position = Vector2(7.47253, 38.5)
+rotation = 1.309
+scale = Vector2(0.45458, 1.06934)
+texture = ExtResource("2_4gt2p")
+
+[connection signal="WeaponChanged" from="." to="." method="OnWeaponChanged"]

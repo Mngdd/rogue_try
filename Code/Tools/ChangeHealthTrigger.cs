@@ -47,7 +47,7 @@ public partial class ChangeHealthTrigger : Node2D {
 		
 		GD.Print("_act, does damage stuff lolll");
 		Player pl = (Player)body;
-		pl.HpSystem.Call("AddHealth", HealthAdd);
+		pl.HealthComponent.Call("AddHealth", HealthAdd);
 		// then repeat...
 	}
 	
